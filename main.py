@@ -17,7 +17,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
-    terabox_domains = ["terabox.com", "1024tera.com", "teraboxapp.com"]
+    terabox_domains = ["terabox.com", "terabox.app", "1024tera.com", "teraboxapp.com", "terabox.fun"]
     if any(domain in text for domain in terabox_domains):
         await update.message.reply_text("⏳ Processing...")
         try:
