@@ -1,10 +1,10 @@
+import os
 import logging
-import re
 import requests
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-TOKEN = "8593772985:AAHQH_vIoq-lVJBmFZ7QU1hMdcX0AGr1eto"
+TOKEN = os.environ.get("TOKEN")
 
 logging.basicConfig(level=logging.INFO)
 
@@ -20,7 +20,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
     terabox_domains = ["terabox.com", "1024tera.com", "teraboxapp.com", "terasharelink.com"]
-    
     if any(domain in text for domain in terabox_domains):
         await update.message.reply_text("⏳ Link check ho raha hai...")
         try:
@@ -37,7 +36,7 @@ async def handle_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             await update.message.reply_text("❌ Link kaam nahi kar raha. Dobara try karein.")
     else:
-        await update.message.reply_text("⚠️ Sirf Terabox links support hain!\n\nExample: https://terabox.com/s/xxx")
+        await update.message.reply_text("⚠️ Sirf Terabox links support hain!")
 
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
